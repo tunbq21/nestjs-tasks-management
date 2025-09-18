@@ -11,7 +11,8 @@ import { promises } from 'dns';
 export class TasksService {
     constructor(
         @InjectRepository(TaskRepository)
-        private taskRepository: TaskRepository
+        // private taskRepository: TaskRepository
+        private readonly taskRepository: TaskRepository,
     ) {}
 
     async getTaskById(id: string): Promise<Task> {
@@ -22,7 +23,7 @@ export class TasksService {
         return found;
     }
 
-    getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+     getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
         return this.taskRepository.getTasks(filterDto);
     }
 
