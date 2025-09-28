@@ -4,6 +4,7 @@ import { TasksService } from './tasks.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './dto/task.entity';
 import { TaskRepository } from './task.repository';
+import { AuthModule } from 'src/auth/auth.module';
 
 // @Module({
 //   imports: [TypeOrmModule.forFeature([TaskRepository])],
@@ -13,7 +14,7 @@ import { TaskRepository } from './task.repository';
 // export class TasksModule {}
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Task])], // chỉ cần entity
+  imports: [TypeOrmModule.forFeature([Task]), AuthModule], // chỉ cần entity
   providers: [TasksService, TaskRepository],   // thêm custom repo vào providers
   controllers: [TasksController],
 })
