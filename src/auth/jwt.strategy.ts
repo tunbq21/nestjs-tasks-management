@@ -15,9 +15,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         @InjectRepository(UsersRepository)
         private usersRepository: UsersRepository,
         private jwtService: JwtService,
+        private configService: ConfigService,
     ) { 
         super({
-            secretOrKey: 'topSecret51',
+            secretOrKey: configService.get('JWT_SECRET'),
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         });
     }
