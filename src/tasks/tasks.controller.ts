@@ -7,12 +7,18 @@ import { UpdateTaskStatusDto } from './dto/update-status.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/auth/user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
+import { ConfigService } from '@nestjs/config';
 
 
 @Controller('tasks')
 export class TasksController {
     private logger = new Logger('TasksController');
-    constructor(private tasksService: TasksService) {}
+    constructor(
+        private tasksService: TasksService,
+        // private configService: ConfigService,
+    ) {
+        // console.log('Config Service', this.configService.get('DATABASE_HOST'));
+    }
 
     @Get('/:id')
     @UseGuards(AuthGuard())

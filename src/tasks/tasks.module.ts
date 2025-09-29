@@ -5,6 +5,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './dto/task.entity';
 import { TaskRepository } from './task.repository';
 import { AuthModule } from 'src/auth/auth.module';
+// import { ConfigModule } from '@nestjs/config';
+
+
+@Module({
+  imports: [
+    // ConfigModule,
+    TypeOrmModule.forFeature([Task]),
+    AuthModule,
+  ],
+  providers: [TasksService, TaskRepository],
+  controllers: [TasksController],
+})
+export class TasksModule {}
 
 // @Module({
 //   imports: [TypeOrmModule.forFeature([TaskRepository])],
@@ -12,11 +25,3 @@ import { AuthModule } from 'src/auth/auth.module';
 //   providers: [TasksService],
 // })
 // export class TasksModule {}
-
-@Module({
-  imports: [TypeOrmModule.forFeature([Task]), AuthModule], // chỉ cần entity
-  providers: [TasksService, TaskRepository],   // thêm custom repo vào providers
-  controllers: [TasksController],
-})
-export class TasksModule {}
-
